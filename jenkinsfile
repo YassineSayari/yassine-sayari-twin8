@@ -1,32 +1,30 @@
 pipeline {
 
-    agent any
+ agent any
 
+ tools {jdk 'JAVA_HOME’, maven 'M2_HOME'}
 
+ stages {
 
-    stages {
+ stage('GIT') {
 
-        stage('Checkout') {
+           steps {
 
-            steps {
+               git branch: 'master',
 
-                git branch: 'main', url: ='https://github.com/YassineSayari/yassine-sayari-twin8.git'
+               url: ' https://github.com/YassineSayari/yassine-sayari-twin8.git'
 
-            }
-        }
+          }
 
+     }
 
+ stage ('Compile Stage') {
 
-        stage('Build') {
+ steps {
 
-            steps {
+ sh 'mvn clean compile'
 
-                sh 'mvn compile'
+ }
 
-            }
+ }
 
-        }
-
-    }
-
-}
