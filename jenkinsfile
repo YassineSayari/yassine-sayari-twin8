@@ -34,18 +34,14 @@ pipeline {
             }
         }
 
-        stage('Docker Login & Push') {
+        stage('Docker Login') {
             steps {
-                withCredentials([usernamePassword(
-                    credentialsId: 'dockerhub',
-                    usernameVariable: 'yassinesayari',
-                    passwordVariable: '@Mygiver1411'
-                )]) {
-                    sh """
-                        echo "$DOCKER_PASS" | docker login -u "$DOCKER_USER" --password-stdin
-                        docker push ${DOCKER_IMAGE}:${DOCKER_TAG}
-                    """
-                }
+                sh 'echo $DOCKER_CREDENTIALS_ID_PSW | docker login -u $DOCKER_CREDENTIALS_ID_USR --password-stdin'
+            }
+        }
+        stage('Docker Push') {
+            steps {
+                sh 'docker push ${SPRING_IMAGE_NAME}:${SPRING_IMAGE_TAG}'
             }
         }
     }
