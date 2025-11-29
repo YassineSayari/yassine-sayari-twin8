@@ -7,7 +7,7 @@ pipeline {
     }
 
     environment {
-        DOCKER_IMAGE = "yassinesayari/twin8-app"    // change to your repo
+        DOCKER_IMAGE = "yassinesayari/alpine"    
         DOCKER_TAG = "latest"
     }
 
@@ -47,12 +47,6 @@ pipeline {
                     """
                 }
             }
-        }
-    }
-
-    post {
-        always {
-            sh 'docker logout'
         }
     }
 }
